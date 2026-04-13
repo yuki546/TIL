@@ -5,7 +5,7 @@
 `useEffect` は React のフックで、**副作用（side effects）** を関数コンポーネントで扱うためのもの。
 「レンダリングの外側で起きる処理」を書く場所と捉えるとわかりやすい。
 
-副作用の例:
+副作用の例：
 - データフェッチ
 - DOM の直接操作
 - タイマー（`setTimeout` / `setInterval`）
@@ -43,7 +43,7 @@ useEffect(() => {
     console.log('tick');
   }, 1000);
 
-  return () => clearInterbal(id); // クリーンアップ
+  return () => clearInterval(id); // クリーンアップ
 }, []);
 ```
 
@@ -53,9 +53,9 @@ useEffect(() => {
 
 ## よくあるミス
 
-- **依存配列の指定漏れ**:effect 内で参照している state や props を依存配列に入れ忘れると、古い値を参照し続ける（stale closure）
-- **オブジェクト・配列を依存配列に入れる**:毎レンダリングで参照が変わるため無限ループになりやすい → `useMemo` / `useCallback` で安定させる
--- **非同期関数を直接渡す**: `useEffect(async () => {...})` は NG。内部で即実行関数として定義する
+- **依存配列の指定漏れ**：effect 内で参照している state や props を依存配列に入れ忘れると、古い値を参照し続ける（stale closure）
+- **オブジェクト・配列を依存配列に入れる**：毎レンダリングで参照が変わるため無限ループになりやすい → `useMemo` / `useCallback` で安定させる
+- **非同期関数を直接渡す**：`useEffect(async () => {...})` は NG。内部で即時実行関数として定義する
 
 ```tsx
 // NG
@@ -82,5 +82,6 @@ useEffect(() => {
 ---
 
 ## 参考
+
 - [React 公式ドキュメント - useEffect](https://react.dev/reference/react/useEffect)
 - [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect)
